@@ -42,7 +42,7 @@ function Controllers() {
       exit={{ y: 200, opacity: 0 }}
       transition={transition}
       className='absolute top-aute sm:bottom-auto bottom-0 sm:top-10 sm:left-10 flex flex-col gap-3 p-2 
-                sm:p-4 bg-white/30 w-full sm:w-fit pb-14 sm:pb-4
+                sm:p-4 bg-white/30 w-full  pb-14 sm:pb-4
                 backdrop-blur-sm rounded-lg sm:w-[250px]
       '
       style={{ border: `1px solid ${color}` }}

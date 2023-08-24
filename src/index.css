@@ -9,7 +9,7 @@
   body,
   #root
    {
-    @apply w-full h-full overflow-hidden;
+    @apply w-full h-full overflow-hidden min-h-screen min-w-[100vw];
   }
 }
 
