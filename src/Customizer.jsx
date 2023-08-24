@@ -15,7 +15,7 @@ function Customizer({ setIntro, config }) {
 
   return (
     <motion.section {...config} key='custom' className=''>
-      <div className='flex justify-end flex-col items-center w-full h-full mb-6'>
+      <div className='flex justify-end flex-col items-center w-full h-full mb-6 overflow-hidden'>
         <div
           className='flex items-center sm:flex-row flex-col absolute z-10
                        sm:translate-y-0 -translate-y-1/2 top-1/3 sm:top-auto sm:bottom-6 
@@ -36,12 +36,13 @@ function Customizer({ setIntro, config }) {
       <Button
         onClick={() => setShowController((s) => !s)}
         color={color}
-        posittion='rotate-90 absolute -left-12 top-7 sm:top-14 
+        posittion='rotate-90 absolute -left-10 top-7 sm:top-14 
       translate-y-full
       '
       >
-        <span className='text-white'> نمایش کنترلر ها</span>
+        <span className='text-white'>{showController ? 'نمایش کنترلر ها' : 'بستن کنترلرها'}</span>
       </Button>
+
       {showController && <Controllers />}
 
       <div className='absolute left-12 bottom-5 sm:bottom-10'>

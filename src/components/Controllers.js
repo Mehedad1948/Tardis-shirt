@@ -36,12 +36,10 @@ function Controllers() {
   };
 
   return (
-    <motion.div
-      initial={{ y: 200, opacity: 0 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ y: 200, opacity: 0 }}
-      transition={transition}
-      className='absolute top-aute sm:bottom-auto bottom-0 sm:top-10 sm:left-10 flex flex-col gap-3 p-2 
+    <div
+     
+      className='fixed sm:absolute z-10 top-auto right-0 sm:bottom-auto bottom-0 sm:top-10
+                 sm:left-10 flex flex-col gap-3 p-2 
                 sm:p-4 bg-white/30 w-full  pb-14 sm:pb-4
                 backdrop-blur-sm rounded-lg sm:w-[250px]
       '
@@ -144,7 +142,7 @@ function Controllers() {
           <span className='w-full text-center'>لغو تغیرات</span>
         </Button>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
