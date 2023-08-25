@@ -1,23 +1,36 @@
 import { store } from '../ContextProvider';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import Button from './Button';
 import { motion } from 'framer-motion';
 import { transition, config } from '../Overlay';
 import { RiDeleteBinLine } from 'react-icons/ri';
 
-function Controllers() {
+function Controllers({ showController }) {
   const {
     setImageRotate,
     setImageXPosition,
     setImageYPosition,
     setImageScale,
     color,
+    setUploadedImage,
     resetChanges,
     uploadedImage,
-    setUploadedImage,
+    imageRotate,
+    imageXPosition,
+    imageYPosition,
+    imageScale,
   } = useContext(store);
 
   const [imageName, setImageNmae] = useState('');
+  const container = useRef()
+
+  function handleResetChanges(params) {
+    resetChanges()
+    const inputs = container.current.querySelectorAll('input');
+    inputs.forEach(element => {
+      element.value = element.defaultValue
+    });
+  }
 
   const handleImageUpload = (file) => {
     if (file) {
@@ -37,15 +50,20 @@ function Controllers() {
 
   return (
     <div
-     
-      className='fixed sm:absolute z-10 top-auto right-0 sm:bottom-auto bottom-0 sm:top-10
-                 sm:left-10 flex flex-col gap-3 p-2 
-                sm:p-4 bg-white/30 w-full  pb-14 sm:pb-4
-                backdrop-blur-sm rounded-lg sm:w-[250px]
-      '
+    ref={container}
+      className={
+        (showController ? 'trnslate-y-0' : 'translate-y-full') +
+        ' ' +
+        `fixed z-10 top-auto right-0 sm:bottom-auto bottom-0 sm:top-10 sm:translate-y-0
+                 sm:left-10 sm:right-auto flex flex-col gap-3 p-2 
+                sm:p-4 bg-white/30 w-full pb-14 sm:pb-4
+                backdrop-blur-sm rounded-lg sm:w-[250px] 
+                transition-transform duration-500 ease-out
+      `
+      }
       style={{ border: `1px solid ${color}` }}
     >
-      <div className='flex flex-col'>
+      <div  className='flex flex-col'>
         <label htmlFor='scale'>اندازه</label>
         <input
           style={{ accentColor: color }}
@@ -56,6 +74,7 @@ function Controllers() {
           defaultValue='1.5'
           class='slider'
           onMouseUp={(e) => setImageScale(e.target.value)}
+          onTouchEnd={(e) => setImageScale(e.target.value)}
           id='scale'
         />
       </div>
@@ -72,7 +91,10 @@ function Controllers() {
           onMouseUp={(e) => {
             setImageXPosition(-e.target.value * 0.08);
           }}
-          id='scale'
+          onTouchEnd={(e) => {
+            setImageXPosition(-e.target.value * 0.08);
+          }}
+          id='xPosition'
         />
       </div>
       <div className='flex flex-col'>
@@ -88,7 +110,10 @@ function Controllers() {
           onMouseUp={(e) => {
             setImageYPosition(e.target.value * 0.08);
           }}
-          id='scale'
+          onTouchEnd={(e) => {
+            setImageYPosition(e.target.value * 0.08);
+          }}
+          id='yPosition'
         />
       </div>
       <div className='flex flex-col'>
@@ -99,15 +124,15 @@ function Controllers() {
           min='-180'
           max='180'
           step='1'
-          defaultValue='-1'
+          defaultValue='0'
           class='slider'
           onMouseUp={(e) => {
             setImageRotate((e.target.value / 180) * Math.PI);
           }}
-          //   onChange={(e) => {
-          //     setImageRotate((e.target.value / 180) * Math.PI);
-          //   }}
-          id='scale'
+          onTouchEnd={(e) => {
+            setImageRotate((e.target.value / 180) * Math.PI);
+          }}
+          id='rotate'
         />
       </div>
       <div className='flex flex-col gap-3'>
@@ -116,7 +141,7 @@ function Controllers() {
           htmlFor='file'
         >
           <Button posittion='!w-full pointer-events-none' color={color}>
-            <span className='w-full  text-center'>بارگذاری</span>
+            <span className='w-full  text-center'> بارگذاری تصویر</span>
           </Button>
           <input
             onChange={(e) => handleImageUpload(e.target.files[0])}
@@ -127,8 +152,9 @@ function Controllers() {
         </label>
         {imageName && (
           <div
-            onClick={() => {setUploadedImage(null)
-            setImageNmae('')
+            onClick={() => {
+              setUploadedImage(null);
+              setImageNmae('');
             }}
             style={{ border: `1px solid ${color}` }}
             className='ml-0 w-full text-left items-center flex justify-between flex-row-reverse
@@ -138,8 +164,8 @@ function Controllers() {
             <RiDeleteBinLine style={{ color }} />
           </div>
         )}
-        <Button onClick={resetChanges} posittion='!w-full ' color={color}>
-          <span className='w-full text-center'>لغو تغیرات</span>
+        <Button onClick={handleResetChanges} posittion='!w-full ' color={color}>
+          <span className='w-full text-center'>لغو تغییرات</span>
         </Button>
       </div>
     </div>

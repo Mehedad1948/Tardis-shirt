@@ -14,12 +14,12 @@ function Customizer({ setIntro, config }) {
   const [showController, setShowController] = useState(false);
 
   return (
-    <motion.section {...config} key='custom' className=''>
+    <motion.section {...config} key='custom' className='w-full'>
       <div className='flex justify-end flex-col items-center w-full h-full mb-6 overflow-hidden'>
         <div
           className='flex items-center sm:flex-row flex-col absolute z-10
-                       sm:translate-y-0 -translate-y-1/2 top-1/3 sm:top-auto sm:bottom-6 
-                       right-8 sm:right-auto gap-3'
+                       sm:translate-y-0 -translate-y-1/2 top-1/2 sm:top-auto sm:bottom-6 
+                       right-6 sm:right-auto gap-3'
         >
           {colors.map((color) => (
             <div
@@ -36,16 +36,17 @@ function Customizer({ setIntro, config }) {
       <Button
         onClick={() => setShowController((s) => !s)}
         color={color}
-        posittion='rotate-90 absolute -left-10 top-7 sm:top-14 
-      translate-y-full
+        posittion='sm:hidden absolute left-5 top-5  
       '
       >
-        <span className='text-white'>{showController ? 'نمایش کنترلر ها' : 'بستن کنترلرها'}</span>
+        <span className='text-white'>
+          {!showController ? 'نمایش کنترلر ها' : 'بستن کنترلرها'}
+        </span>
       </Button>
 
-      {showController && <Controllers />}
+       <Controllers showController={showController} />
 
-      <div className='absolute left-12 bottom-5 sm:bottom-10'>
+      <div className='absolute left-5 sm:left-10 bottom-5 sm:bottom-10'>
         <div className='flex gap-5'>
           {decals.map((decal) => (
             <div key={decal} onClick={() => setDecal(decal)}>
@@ -73,13 +74,13 @@ function Customizer({ setIntro, config }) {
           link.click();
         }}
         color={color}
-        posittion='absolute bottom-5 sm:bottom-10 right-10'
+        posittion='absolute bottom-5 sm:bottom-10 right-5 sm:right-10'
       >
-        <span>ذخیره</span>
+        <span>دانلود طرح</span>
         <AiFillCamera size='1.3em' />
       </Button>
       <Button
-        posittion='absolute top-5 sm:top-10 right-10'
+        posittion='absolute top-5 sm:top-10 right-5 sm:right-10'
         color={color}
         onClick={() => setIntro(true)}
       >
