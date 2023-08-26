@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 
 export const store = createContext();
 
@@ -11,6 +11,14 @@ function ContextProvider({ children }) {
   const [imageYPosition, setImageYPosition] = useState(0);
   const [imageScale, setImageScale] = useState(1);
   const [uploadedImage, setUploadedImage] = useState(null);
+
+  const [isSmall, setIsSmall] = useState()
+  useEffect(() => {
+ const width =  window.innerWidth
+ if (width < 600) {
+   setIsSmall(true)
+ }
+ }, [])
 
   function resetChanges(params) {
     setImageRotate(0);
@@ -39,6 +47,7 @@ function ContextProvider({ children }) {
         resetChanges,
         uploadedImage,
         setUploadedImage,
+        isSmall
       }}
     >
       {children}

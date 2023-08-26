@@ -50,7 +50,8 @@ function Intro({ setIntro, config }) {
           <div>
             <h1
               // style={{ filter: `drop-shadow(0px 5px 5px ${color})` }}
-              className='text-7xl sm:text-9xl font-extrabold italic   from-slate-800 to-black 
+              className='text-7xl sm:text-9xl font-extrabold sm:italic  
+                       from-slate-800 to-black 
             '
             >
               خلاقیت <br />

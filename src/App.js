@@ -1,13 +1,16 @@
-import ContextProvider from './ContextProvider'
-import Platform from './Platform'
-import Overlay from './Overlay'
+import ContextProvider, { store } from './ContextProvider';
+import Platform from './Platform';
+import Overlay from './Overlay';
+import { useContext } from 'react';
 
 function App() {
+  const { isSmall } = useContext(store);
+
   return (
-    <ContextProvider>
-      <Platform />
+    <>
+      <Platform fov={isSmall ? 30 : 25} />
       <Overlay />
-    </ContextProvider>
+    </>
   );
 }
 

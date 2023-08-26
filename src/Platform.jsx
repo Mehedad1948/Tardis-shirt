@@ -94,7 +94,7 @@ function Backdrop(params) {
       temporal
       frames={60}
       alphaTest={0.85}
-      scale={10}
+      scale={15}
       rotation={[Math.PI / 2, 0, 0]}
       position={[0, 0, -0.14]}
     >
@@ -117,13 +117,21 @@ function Backdrop(params) {
 }
 
 function CameraRig({ children }) {
-  const { intro, setIntro } = useContext(store);
+  const { intro, setIntro, isSmall } = useContext(store);
 
   const group = useRef();
   useFrame((state, delta) => {
     easing.damp3(
       state.camera.position,
-      [intro ? state.viewport.width / 4 : 0, 0, 2],
+      [
+        intro
+          ? isSmall
+            ? state.viewport.width / 7
+            : state.viewport.width / 4
+          : 0,
+        isSmall? state.viewport.height/10 : 0,
+        2,
+      ],
       0.25,
       delta
     );
