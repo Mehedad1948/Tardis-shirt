@@ -42,7 +42,7 @@ function Intro({ setIntro, config }) {
         transition={{ type: 'spring', duration: 1.8, delay: 1 }}
         className='flex items-start justify-between'
       >
-        <h1 className='font-semibold text-2xl'>تـاردیس</h1>
+        <h1 className='font-semibold text-2xl'>تـارادیسو</h1>
         <AiOutlineShopping size='3em' />
       </motion.header>
       <section className='' key='main'>
