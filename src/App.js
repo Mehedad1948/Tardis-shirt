@@ -8,7 +8,7 @@ function App() {
 
   return (
     <>
-      <Platform fov={isSmall ? 30 : 25} />
+      <Platform fov={isSmall ? 33 : 25} />
       <Overlay />
     </>
   );

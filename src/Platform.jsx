@@ -7,12 +7,13 @@ import {
   RandomizedLight,
   useTexture,
   Decal,
+  Loader,
 } from '@react-three/drei';
-import { useContext, useRef } from 'react';
+import { Suspense, useContext, useRef } from 'react';
 import { easing } from 'maath';
 import { store } from './ContextProvider';
 
-function Platform({ position = [0, 0, 2.5], fov = 25 }) {
+function Platform({ position = [0, 0.0, 2.5], fov = 25 }) {
   return (
     <div className='w-full min-h-full h-full relative bottom-0 pointer-events-none'>
       <Canvas
@@ -26,11 +27,12 @@ function Platform({ position = [0, 0, 2.5], fov = 25 }) {
         <Environment files='https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/potsdamer_platz_1k.hdr' />
         <CameraRig>
           <Center>
-            <Shirt />
-            <Backdrop />
+              <Shirt />
+              <Backdrop />
           </Center>
         </CameraRig>
       </Canvas>
+      {/* <Loader /> */}
     </div>
   );
 }
@@ -129,7 +131,7 @@ function CameraRig({ children }) {
             ? state.viewport.width / 7
             : state.viewport.width / 4
           : 0,
-        isSmall? state.viewport.height/10 : 0,
+        isSmall? 0 : -0.05,
         2,
       ],
       0.25,
